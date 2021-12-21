@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import toys.Car;
-import toys.Helicopter;
+import toyproducts.Toy;
+import toyproducts.models.CarToy;
+import toyproducts.models.HelicopterToy;
 import toys.SerialNumberGenerator;
 import toys.ToyBusiness;
 public class Main {
@@ -10,22 +11,16 @@ public class Main {
    
     public static void main(String[] args) {
         ToyBusiness business = new ToyBusiness();
-        ArrayList<Car> cars = new ArrayList<>();
-        ArrayList<Helicopter> helicopters = new ArrayList<>();
+        ArrayList<Toy> toys = new ArrayList<>();
         Scanner in = new Scanner(System.in); 
         String line = "";
         while(!line.equals("exit")){
             line = in.nextLine();
             switch(line){
-                case "car":
-                cars.add(business.createCar());
-                System.out.println("Built cars: "+ cars.stream().map(c->c.getSerialNumber().toString()).collect(Collectors.joining(", ")));
-                break;
-            
-            
+            case "car":
             case "helicopter":
-                helicopters.add(business.createHelicopter());
-                System.out.println("Built helicopters: "+ helicopters.stream().map(c->c.getSerialNumber().toString()).collect(Collectors.joining(", ")));
+                toys.add(business.createToy(line));
+                System.out.println("Built toys: "+ toys.stream().map(c->c.toString()).collect(Collectors.joining(", ")));
                 break;
             
             case "exit":
