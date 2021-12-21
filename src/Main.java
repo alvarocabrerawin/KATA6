@@ -1,16 +1,19 @@
+import branches.AmericanToyBusiness;
+import branches.AsianToyBusiness;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import toyproducts.Toy;
-import toyproducts.models.CarToy;
-import toyproducts.models.HelicopterToy;
+import toyproducts.models.AmericanCarToy;
+import toyproducts.models.AmericanHelicopterToy;
 import toys.SerialNumberGenerator;
-import toys.ToyBusiness;
+import business.ToyBusiness;
 public class Main {
 
    
     public static void main(String[] args) {
-        ToyBusiness business = new ToyBusiness();
+        //ToyBusiness business = new AmericanToyBusiness();
+        ToyBusiness business = new AsianToyBusiness();
         ArrayList<Toy> toys = new ArrayList<>();
         Scanner in = new Scanner(System.in); 
         String line = "";
@@ -32,5 +35,8 @@ public class Main {
             }
         }
 
+    }
+
+    public Main() {
     }
 }
