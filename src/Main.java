@@ -1,20 +1,19 @@
-import branches.AmericanToyBusiness;
-import branches.AsianToyBusiness;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import toyproducts.Toy;
-import toyproducts.models.AmericanCarToy;
-import toyproducts.models.AmericanHelicopterToy;
-import toys.SerialNumberGenerator;
 import business.ToyBusiness;
+import factories.regionalfactories.AmericanToyFactory;
+import factories.regionalfactories.AsianToyFactory;
 public class Main {
 
    
     public static void main(String[] args) {
         //ToyBusiness business = new AmericanToyBusiness();
-        ToyBusiness business = new AsianToyBusiness();
         ArrayList<Toy> toys = new ArrayList<>();
+        AmericanToyFactory americanToyFactory = new AmericanToyFactory();
+        AsianToyFactory asianToyFactory = new AsianToyFactory();
+        ToyBusiness toyBusiness = new ToyBusiness(asianToyFactory);
         Scanner in = new Scanner(System.in); 
         String line = "";
         while(!line.equals("exit")){
@@ -22,8 +21,8 @@ public class Main {
             switch(line){
             case "car":
             case "helicopter":
-                toys.add(business.createToy(line));
-                System.out.println("Built toys: "+ toys.stream().map(c->c.toString()).collect(Collectors.joining(", ")));
+                toys.add(toyBusiness.produceToy(line));
+                System.out.println("Toys: "+ toys.stream().map(c->c.toString()).collect(Collectors.joining(", ")));
                 break;
             
             case "exit":
