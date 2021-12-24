@@ -3,17 +3,21 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import toyproducts.Toy;
 import business.ToyBusiness;
-import factories.regionalfactories.AmericanToyFactory;
-import factories.regionalfactories.AsianToyFactory;
+import factories.regionalfactories.AmericanCarToyFactory;
+import factories.regionalfactories.AmericanSubmarineToyFactory;
+import factories.regionalfactories.AsianHelicopterToyFactory;
 public class Main {
 
    
     public static void main(String[] args) {
-        //ToyBusiness business = new AmericanToyBusiness();
+        ToyBusiness business = new ToyBusiness();
+        business.add("car", new AmericanCarToyFactory());
+        business.add("helicopter", new AsianHelicopterToyFactory());
+        business.add("submarine", new AmericanSubmarineToyFactory());
         ArrayList<Toy> toys = new ArrayList<>();
-        AmericanToyFactory americanToyFactory = new AmericanToyFactory();
-        AsianToyFactory asianToyFactory = new AsianToyFactory();
-        ToyBusiness toyBusiness = new ToyBusiness(asianToyFactory);
+        
+        
+        
         Scanner in = new Scanner(System.in); 
         String line = "";
         while(!line.equals("exit")){
@@ -21,8 +25,9 @@ public class Main {
             switch(line){
             case "car":
             case "helicopter":
-                toys.add(toyBusiness.produceToy(line));
-                System.out.println("Toys: "+ toys.stream().map(c->c.toString()).collect(Collectors.joining(", ")));
+            case "submarine":
+                toys.add(business.produceToy(line));
+                System.out.println("Built toys: "+ toys.stream().map(c->c.toString()).collect(Collectors.joining(", ")));
                 break;
             
             case "exit":
