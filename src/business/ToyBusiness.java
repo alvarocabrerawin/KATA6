@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ToyBusiness {
    final private Map<String,ToyFactory> toyFactories = new HashMap<>();
-   final private SerialNumberGenerator generator = new SerialNumberGenerator();
+   
    
    
 
@@ -20,7 +20,7 @@ public class ToyBusiness {
    }
    
     public Toy produceToy(String type){
-        return this.toyFactories.get(type).produceToy(this.generator.next());
+        return this.toyFactories.get(type).produceToy();
     }
   
      

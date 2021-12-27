@@ -1,13 +1,22 @@
 package toyproducts.models;
 
+import componentfactories.ComponentFactory;
+import componentfactories.regionalcomponentfactories.AmericanComponentFactory;
+import componentfactories.regionalcomponentfactories.AsianComponentFactory;
 import toyproducts.Toy;
+import toyproducts.components.Engine;
+import toyproducts.components.Wheel;
 
 public class AsianCarToy implements Toy {
     final private Integer serialNumber;
     final String type = "car";
+    final ComponentFactory factory;
+    private Engine engine;
+    final private Wheel[] wheels = new Wheel[4];
 
     public AsianCarToy(Integer serialNumber) {
         this.serialNumber = serialNumber;
+        this.factory = new AsianComponentFactory();
     }
 
     @Override
@@ -26,6 +35,15 @@ public class AsianCarToy implements Toy {
     @Override
     public void label(){
         System.out.printf("Labelling '%s' '%d\n'", this.type, this.serialNumber);
+        
+    }
+    
+    @Override
+    public void prepare() {
+        this.engine = this.factory.createEngine();
+        for(int i = 0; i<this.wheels.length-1;i++){
+            this.wheels[i] = this.factory.createWheel();
+        }
         
     }
 
